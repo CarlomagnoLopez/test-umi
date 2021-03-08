@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardItemUser from './CardItemUser';
+import CardItem from './CardItem';
 import 'bulma/css/bulma.css'
-const UserList = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
+const List = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
 
 
     const [valueInput, setValueInput] = React.useState("")
@@ -13,7 +13,7 @@ const UserList = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
         }
         return (
             <div key={index}>
-                <CardItemUser user={item} />
+                <CardItem user={item} />
             </div>)
     })
 
@@ -56,7 +56,7 @@ const UserList = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
     );
 };
 
-UserList.propTypes = {
+List.propTypes = {
     onNext: PropTypes.func.isRequired,
     onPrev: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
@@ -64,4 +64,4 @@ UserList.propTypes = {
     users: PropTypes.array.isRequired,
 };
 
-export default UserList;
+export default List;

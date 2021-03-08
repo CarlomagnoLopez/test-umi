@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css'
-const CardItemUser = (props: any) => {
+const CardItem = (props: any) => {
 
     const { user } = props;
     return (
@@ -27,4 +27,4 @@ const CardItemUser = (props: any) => {
 };
 
 
-export default CardItemUser;
+export default CardItem;

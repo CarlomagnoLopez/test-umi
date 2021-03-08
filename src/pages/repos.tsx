@@ -4,7 +4,7 @@ import List from "./components/List";
 import Message from "./components/Message";
 import 'bulma/css/bulma.css'
 
-class Users extends React.Component<{ dispatch: any, datalayer: any, loading: any }> {
+class Repos extends React.Component<{ dispatch: any, datalayer: any, loading: any }> {
 
   constructor(props: any) {
     super(props);
@@ -38,7 +38,7 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   onFil = (filter: any) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'datalayer/byOne',
+      type: 'datalayer/byOneRepos',
       payload: {
         filter: filter
       },
@@ -49,7 +49,7 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   requestDataToGit = (initId: any) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'datalayer/fetch',
+      type: 'datalayer/fetchRepos',
       payload: {
         since: initId
       },
@@ -118,4 +118,4 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
 
 export default connect(({ datalayer }: any) => ({
   datalayer,
-}))(Users);
+}))(Repos);
