@@ -83,25 +83,23 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
 
     }
 
+    let userRender = [];
     if (datalayer.data && datalayer.data[0]) {
-      currentComponent = <List
-        onNext={this.onNext}
-        onPrev={this.onPrev}
-        onFilter={this.onFil}
-        onReset={this.onReset}
-        users={datalayer.data}
-      ></List>;
+      userRender = datalayer.data
     }
 
     if (datalayer.data && !datalayer.data[0]) {
-      currentComponent = <List
-        onNext={this.onNext}
-        onPrev={this.onPrev}
-        onFilter={this.onFil}
-        onReset={this.onReset}
-        users={[datalayer.data]}
-      ></List>;
+      userRender = [datalayer.data]
     }
+
+    currentComponent = <List
+      onNext={this.onNext}
+      onPrev={this.onPrev}
+      onFilter={this.onFil}
+      onReset={this.onReset}
+      textFilter={"Search by User Name"}
+      users={userRender}
+    ></List>;
 
 
     return (

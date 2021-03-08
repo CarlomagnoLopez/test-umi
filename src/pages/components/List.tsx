@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardItem from './CardItem';
 import 'bulma/css/bulma.css'
-const List = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
+const List = ({ onNext, onPrev, onFilter, onReset, textFilter, users }: any) => {
 
 
     const [valueInput, setValueInput] = React.useState("")
@@ -41,7 +41,7 @@ const List = ({ onNext, onPrev, onFilter, onReset, users }: any) => {
             </nav>
             <div className="panel-block">
                 <p className="control has-icons-left">
-                    <input className="input is-info" type="text" value={valueInput} onChange={e => setValueInput(e.currentTarget.value)} placeholder="Search by User Name" onKeyDown={handleKeyDown} />
+                    <input className="input is-info" type="text" value={valueInput} onChange={e => setValueInput(e.currentTarget.value)} placeholder={textFilter} onKeyDown={handleKeyDown} />
                     <span className="icon is-left">
                         <i className="fas fa-search" aria-hidden="true"></i>
                     </span>
@@ -61,6 +61,7 @@ List.propTypes = {
     onPrev: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,
+    textFilter: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
 };
 
