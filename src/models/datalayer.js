@@ -1,4 +1,4 @@
-import { getGitHubPublicRepos, getOneUser } from '@/services/api';
+import { getGitHubUser, getOneUser, getGitHubRepos } from '@/services/api';
 
 export default {
     namespace: 'datalayer',
@@ -11,9 +11,22 @@ export default {
                 type: 'changeLoader',
                 payload: "",
             });
-            const response = yield call(getGitHubPublicRepos, payload);
+            const response = yield call(getGitHubUser, payload);
             yield put({
-                type: 'getGitHubRepos',
+                type: 'getGitHubUser',
+                payload: response,
+            });
+
+        },
+
+        * fetchRepos({ payload }, { call, put }) {
+            yield put({
+                type: 'changeLoader',
+                payload: "",
+            });
+            const response = yield call(getGitHubRepos, payload);
+            yield put({
+                type: 'getGitHubRepoByOrg',
                 payload: response,
             });
 
@@ -23,6 +36,18 @@ export default {
             yield put({
                 type: 'resetState',
                 payload: payload,
+            });
+
+        },
+        * byOneRepos({ payload }, { call, put }) {
+            yield put({
+                type: 'changeLoader',
+                payload: "",
+            });
+            const response = yield call(getOneUser, payload);
+            yield put({
+                type: 'getOneRepo',
+                payload: response,
             });
 
         },
@@ -40,7 +65,17 @@ export default {
         },
     },
     reducers: {
-        getGitHubRepos(state, { payload }) {
+        getGitHubUser(state, { payload }) {
+            const { data, err } = payload;
+            return {
+                ...state,
+                loading: false,
+                data,
+                err
+            };
+        },
+
+        getGitHubRepoByOrg(state, { payload }) {
             const { data, err } = payload;
             return {
                 ...state,
@@ -51,6 +86,15 @@ export default {
         },
 
         getOneUser(state, { payload }) {
+            const { data, err } = payload;
+            return {
+                ...state,
+                loading: false,
+                data,
+                err
+            };
+        },
+        getOneRepo(state, { payload }) {
             const { data, err } = payload;
             return {
                 ...state,
