@@ -17,11 +17,14 @@ To enable this feature I integrate AWS Amplify to the Git Hub with an acces toke
 I configurated two branches for DEV and PRD enviroment.
 
 - PRD: Main Branch, once it get a new changes or new PR or merge, Amplify service get it, Amplify will deploy it automatically.
+    -   https://main.d2tktj0zd4kgzl.amplifyapp.com/
 - DEV: Same than Main Branch
+    -   https://dev.d2tktj0zd4kgzl.amplifyapp.com/
 
 The correct work flow for CI/CD, should be to create a PR over DEV branch, after testing we can create a PR over Main branch.  
 
-# Stack Tech
+# Tech Stack
+
 - Reacr JS
 - UMI JS -> https://v2.umijs.org/
 - DVA -> https://dvajs.com/
@@ -31,7 +34,8 @@ The correct work flow for CI/CD, should be to create a PR over DEV branch, after
 - HTML and CSS
 - TS
 
-# Features
+# Description
+
 - Base layout - /src/layout/index.tsx
 - Route config - /.umirc.ts 
 - Models and Logic to change state for component  - /src/model/datalayer/
