@@ -28,6 +28,7 @@ const Header: React.FC = (props) => {
                 <div className="navbar-start">
                     <Link className="navbar-item" to="/">Home</Link>
                     <Link className="navbar-item" to="/users">Git User</Link>
+                    <Link className="navbar-item" to="/repos">Git Repos</Link>
                     <a className="navbar-item" href="https://www.linkedin.com/in/carlomagno-lopez-campos-331328120/" target="_blank">
                         Carlomagno LC
                     </a>

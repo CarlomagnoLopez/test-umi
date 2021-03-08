@@ -10,7 +10,8 @@ const config: IConfig = {
       path: '/',
       component: '../layouts/index',
       routes: [
-        { path: '/users', component: '../pages/users', title: "Repo by Users" },
+        { path: '/users', component: '../pages/users', title: "User" },
+        { path: '/repos', component: '../pages/repos', title: "Repo" },
         { path: '/', component: '../pages/index', title: "Home" },
       ]
     },
