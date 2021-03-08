@@ -104,7 +104,7 @@ class Repos extends React.Component<{ dispatch: any, datalayer: any, loading: an
       onPrev={this.onPrev}
       onFilter={this.onFil}
       onReset={this.onReset}
-      textFilter={"Search by Repo Name"}
+      textFilter={"Search by Org Name"}
       users={userRender}
     ></List>;
 

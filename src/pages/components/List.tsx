@@ -30,7 +30,7 @@ const List = ({ onNext, onPrev, onFilter, onReset, textFilter, users }: any) => 
     return (
         <article className="panel is-info">
             <p className="panel-heading">
-                Git Hub Users List
+               {textFilter === "Search by User Name" ? "Git Hub Users List" : "Git Hub Org List"} 
              </p>
             <nav className="pagination is-left p-3" role="navigation" aria-label="pagination">
                 <a className="pagination-previous" onClick={() => onPrev(initId)} >Previous</a>
