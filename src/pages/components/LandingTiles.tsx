@@ -18,7 +18,7 @@ const LandingTiles = (props: any) => {
                     <div className="tile is-parent">
                         <article className="tile is-child notification is-info">
                             <p className="title">This is a simulation</p>
-                            <p className="subtitle">for a lanfing page</p>
+                            <p className="subtitle">for a landing page</p>
                         </article>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ const Message = (props: any) => {
             <div className="message-body">
                 {titleMessage}
                 <br></br>
-                <br></br>
+                <br></br> 
                 {inviteMessage}
                 <br></br>
                 <br></br>
