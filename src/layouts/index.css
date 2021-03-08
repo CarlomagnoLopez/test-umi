@@ -1,0 +1,9 @@
+.black-color-bg {
+    background-color: black;
+}
+
+.gitimg {
+    width: 100%;
+    background: url(../assets/gitimg.png) no-repeat center 5px;
+    height: 100%;
+}
