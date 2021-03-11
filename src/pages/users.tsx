@@ -6,8 +6,14 @@ import 'bulma/css/bulma.css'
 
 class Users extends React.Component<{ dispatch: any, datalayer: any, loading: any }> {
 
-  constructor(props: any) {
+  constructor(props: any, state: any) {
     super(props);
+
+    this.state = {
+      loading: false,
+      filterByUSer: "",
+      timeIntervalForFllter: "",
+    }
 
   }
 
@@ -35,8 +41,34 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   onPrev = (initId: any) => {
     this.requestDataToGit(initId - 10)
   }
+
+  filterByTimeAndInput = () => {
+    // console.log("requesting with values: ");
+    // console.log(this.state.filterByUSer);
+    clearInterval(this.state.timeIntervalForFllter);
+    this.onRequestFileter(this.state.filterByUSer);
+  }
+
   onFil = (filter: any) => {
+    if (filter !== "") {
+
+      clearInterval(this.state.timeIntervalForFllter);
+      this.setState({
+        filterByUSer: filter,
+        timeIntervalForFllter: setInterval(this.filterByTimeAndInput, 300)
+      });
+
+
+
+    } else {
+      // console.log("...requesting with empty values ")
+      this.onReset();
+    }
+  }
+
+  onRequestFileter = (filter: any) => {
     const { dispatch } = this.props;
+
     dispatch({
       type: 'datalayer/byOne',
       payload: {
@@ -59,47 +91,73 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   render() {
     const { datalayer } = this.props;
     let currentComponent = <progress className="progress is-small is-primary" max="100">15%</progress>;
+    let propsForComponent = {
+      titleMessage: "",
+      inviteMessage: "?",
+      textButton: "",
+      typeMeesage: ""
+    };
     if (datalayer.err) {
 
       if (datalayer.err.response && (datalayer.err.response.status === "404" || datalayer.err.response.status === 404)) {
-
-        currentComponent = (<Message
-          titleMessage="The user does not exist on Git Hub!"
-          inviteMessage="Would you try it with another one?"
-          textButton="Another one!"
-          typeMeesage="info"
-
-        />)
+        propsForComponent =
+        {
+          titleMessage: "The user does not exist on Git Hub!",
+          inviteMessage: "Would you try it with another one?",
+          textButton: "Reload?",
+          typeMeesage: "info"
+        }
       } else {
-        currentComponent = (
-          <Message
-            titleMessage="The request have gotten a fail respose!"
-            inviteMessage="Would you try it again?"
-            textButton="Try it!"
-            typeMeesage="danger"
-          />
-        )
+        propsForComponent =
+        {
+          titleMessage: "The request have gotten a fail respose!",
+          inviteMessage: "Would you try it again?",
+          textButton: "Reload?",
+          typeMeesage: "danger"
+        }
       }
 
+      let messageOnList = <Message
+        titleMessage={propsForComponent.titleMessage}
+        inviteMessage={propsForComponent.inviteMessage}
+        textButton={propsForComponent.textButton}
+        typeMeesage={propsForComponent.typeMeesage}
+      />
+
+      currentComponent = <List
+        onNext={this.onNext}
+        onPrev={this.onPrev}
+        onFilter={this.onFil}
+        onReset={this.onReset}
+        textFilter={"Search by User Name"}
+        users={[]}
+        messageOnList={messageOnList}
+      ></List>;
+
     }
 
-    let userRender = [];
-    if (datalayer.data && datalayer.data[0]) {
-      userRender = datalayer.data
+
+    if (datalayer.data) {
+      let userRender = [];
+      if (datalayer.data && datalayer.data[0]) {
+        userRender = datalayer.data
+      }
+
+      if (datalayer.data && !datalayer.data[0]) {
+        userRender = [datalayer.data]
+      }
+
+      currentComponent = <List
+        onNext={this.onNext}
+        onPrev={this.onPrev}
+        onFilter={this.onFil}
+        onReset={this.onReset}
+        textFilter={"Search by User Name"}
+        users={userRender}
+        messageOnList={{}}
+      ></List>;
     }
 
-    if (datalayer.data && !datalayer.data[0]) {
-      userRender = [datalayer.data]
-    }
-
-    currentComponent = <List
-      onNext={this.onNext}
-      onPrev={this.onPrev}
-      onFilter={this.onFil}
-      onReset={this.onReset}
-      textFilter={"Search by User Name"}
-      users={userRender}
-    ></List>;
 
 
     return (
