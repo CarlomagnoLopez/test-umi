@@ -4,15 +4,17 @@ import List from "./components/List";
 import Message from "./components/Message";
 import 'bulma/css/bulma.css'
 
-class Users extends React.Component<{ dispatch: any, datalayer: any, loading: any }> {
+
+class Users extends React.Component<{ dispatch: any, datalayer: any, loading: any, history: any }> {
 
   constructor(props: any, state: any) {
     super(props);
 
     this.state = {
       loading: false,
-      filterByUSer: "",
+      filterBy: "",
       timeIntervalForFllter: "",
+
     }
 
   }
@@ -43,10 +45,8 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   }
 
   filterByTimeAndInput = () => {
-    // console.log("requesting with values: ");
-    // console.log(this.state.filterByUSer);
     clearInterval(this.state.timeIntervalForFllter);
-    this.onRequestFileter(this.state.filterByUSer);
+    this.onRequestFileter(this.state.filterBy);
   }
 
   onFil = (filter: any) => {
@@ -54,7 +54,7 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
 
       clearInterval(this.state.timeIntervalForFllter);
       this.setState({
-        filterByUSer: filter,
+        filterBy: filter,
         timeIntervalForFllter: setInterval(this.filterByTimeAndInput, 300)
       });
 
@@ -67,10 +67,11 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   }
 
   onRequestFileter = (filter: any) => {
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
+    let typeDispatch = (history.location.pathname === "/repos" ? 'datalayer/byOneRepos' : 'datalayer/byOne');
 
     dispatch({
-      type: 'datalayer/byOne',
+      type: typeDispatch,
       payload: {
         filter: filter
       },
@@ -79,9 +80,11 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
 
 
   requestDataToGit = (initId: any) => {
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
+
+    let typeDispatch = (history.location.pathname === "/repos" ? 'datalayer/fetchRepos' : 'datalayer/fetch');
     dispatch({
-      type: 'datalayer/fetch',
+      type: typeDispatch,
       payload: {
         since: initId
       },
@@ -89,7 +92,7 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
   }
 
   render() {
-    const { datalayer } = this.props;
+    const { datalayer, history } = this.props;
     let currentComponent = <progress className="progress is-small is-primary" max="100">15%</progress>;
     let propsForComponent = {
       titleMessage: "",
@@ -152,7 +155,7 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
         onPrev={this.onPrev}
         onFilter={this.onFil}
         onReset={this.onReset}
-        textFilter={"Search by User Name"}
+        textFilter={"Search by " + (history.location.pathname === "/repos" ? "Org" : "User") + " Name"}
         users={userRender}
         messageOnList={{}}
       ></List>;

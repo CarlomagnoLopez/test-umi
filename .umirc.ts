@@ -11,7 +11,7 @@ const config: IConfig = {
       component: '../layouts/index',
       routes: [
         { path: '/users', component: '../pages/users', title: "User" },
-        { path: '/repos', component: '../pages/repos', title: "Repo" },
+        { path: '/repos', component: '../pages/users', title: "Repo" },
         { path: '/', component: '../pages/index', title: "Home" },
       ]
     },
