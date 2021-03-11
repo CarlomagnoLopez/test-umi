@@ -3,7 +3,9 @@ import { getGitHubUser, getOneUser, getGitHubRepos } from '@/services/api';
 export default {
     namespace: 'datalayer',
     state: {
-        loading: false
+        loading: false,
+        filterByUSer: "",
+        timeIntervalForFllter: "",
     },
     effects: {
         * fetch({ payload }, { call, put }) {
