@@ -5,7 +5,7 @@ import Message from "./components/Message";
 import 'bulma/css/bulma.css'
 
 
-class Users extends React.Component<{ dispatch: any, datalayer: any, loading: any, history: any }> {
+class ContainerList extends React.Component<{ dispatch: any, datalayer: any, loading: any, history: any }> {
 
   constructor(props: any, state: any) {
     super(props);
@@ -177,4 +177,4 @@ class Users extends React.Component<{ dispatch: any, datalayer: any, loading: an
 
 export default connect(({ datalayer }: any) => ({
   datalayer,
-}))(Users);
+}))(ContainerList);
