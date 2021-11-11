@@ -1,6 +1,3 @@
-# Assesment ZeBrands 
- This is an assesment for ZeBrands
-
  # Setting local enviroment
 
  1. Clone repository on your compurer
